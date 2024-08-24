@@ -24,6 +24,18 @@ jobs:
           sudo apt-get install -y build-essential git unzip openjdk-8-jdk
           pip install buildozer cython
 
+      - name: Install Android SDK and Tools
+        run: |
+          sudo apt-get install -y wget
+          mkdir -p $HOME/Android/Sdk
+          cd $HOME/Android/Sdk
+          wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
+          unzip commandlinetools-linux-8512546_latest.zip
+          mkdir -p tools/bin
+          mv cmdline-tools/* tools/bin/
+          yes | tools/bin/sdkmanager --sdk_root=$HOME/Android/Sdk --update
+          yes | tools/bin/sdkmanager --sdk_root=$HOME/Android/Sdk "platform-tools" "build-tools;30.0.3" "platforms;android-30"
+          
       - name: Ensure Buildozer.spec file exists
         run: |
           if [ ! -f buildozer.spec ]; then
