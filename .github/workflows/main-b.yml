@@ -3,24 +3,31 @@ on:
   push:
 
 jobs:
-# Build job. Builds app for Android with Buildozer
-build-android:
-  name: Build for Android
-  runs-on: ubuntu-latest
+  build-android:
+    name: Build for Android
+    runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Build with Buildozer
-      uses: ArtemSBulgakov/buildozer-action@v1
-      id: buildozer
-      with:
-        workdir: <specify the directory of the app no don't mention this the app files are in root directory>
-        buildozer_version: stable
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8  # Specify the Python version if needed
 
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: package
-        path: ${{ steps.buildozer.outputs.filename }}
+      - name: Install Buildozer dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential git unzip
+          pip install buildozer
+
+      - name: Build with Buildozer
+        run: buildozer android debug  # Use Buildozer command to build APK
+        working-directory: ./  # Assumes Buildozer.spec is in the root directory
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: bin/*.apk  # Path to the APK file after build
