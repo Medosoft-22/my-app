@@ -14,7 +14,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8  # Specify the Python version if needed
+          python-version: 3.8
 
       - name: Install Buildozer dependencies
         run: |
@@ -22,9 +22,16 @@ jobs:
           sudo apt-get install -y build-essential git unzip
           pip install buildozer
 
+      - name: Ensure Buildozer.spec file exists
+        run: |
+          if [ ! -f buildozer.spec ]; then
+            echo "buildozer.spec file not found!"
+            exit 1
+          fi
+
       - name: Build with Buildozer
-        run: buildozer android debug  # Use Buildozer command to build APK
-        working-directory: ./  # Assumes Buildozer.spec is in the root directory
+        run: buildozer android debug
+        working-directory: ./  # Ensure this matches the location of buildozer.spec
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
