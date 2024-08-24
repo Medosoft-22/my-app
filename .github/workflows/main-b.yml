@@ -18,22 +18,25 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Install Buildozer dependencies
+      - name: Install Buildozer and dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential git unzip openjdk-8-jdk
+          sudo apt-get install -y build-essential git unzip openjdk-8-jdk wget
           pip install buildozer cython
 
       - name: Install Android SDK Command Line Tools
         run: |
-          # Install Android SDK Command Line Tools
+          # Create directories for Android SDK
           mkdir -p $HOME/Android/Sdk/cmdline-tools
           cd $HOME/Android/Sdk/cmdline-tools
+          
+          # Download and extract command line tools
           wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
           unzip commandlinetools-linux-8512546_latest.zip
           mv cmdline-tools/* .
           rm -rf cmdline-tools
-          # Install Android SDK components
+          
+          # Install SDK components
           yes | $HOME/Android/Sdk/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/Android/Sdk --update
           yes | $HOME/Android/Sdk/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/Android/Sdk "platform-tools" "build-tools;30.0.3" "platforms;android-30"
 
