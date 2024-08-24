@@ -1,6 +1,8 @@
 name: Build
 on:
   push:
+    branches:
+      - main  # or your default branch
 
 jobs:
   build-android:
@@ -27,14 +29,16 @@ jobs:
           if [ ! -f buildozer.spec ]; then
             echo "buildozer.spec file not found!"
             exit 1
+          else
+            echo "buildozer.spec file found."
           fi
 
       - name: Build with Buildozer
         run: buildozer android debug
         working-directory: ./  # Ensure this matches the location of buildozer.spec
 
-      - name: Upload artifacts
+      - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: package
-          path: bin/*.apk  # Path to the APK file after build
+          name: apk
+          path: bin/*.apk  # Adjust the path if necessary
