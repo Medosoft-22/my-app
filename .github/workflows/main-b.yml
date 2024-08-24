@@ -21,8 +21,8 @@ jobs:
       - name: Install Buildozer dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential git unzip
-          pip install buildozer
+          sudo apt-get install -y build-essential git unzip openjdk-8-jdk
+          pip install buildozer cython
 
       - name: Ensure Buildozer.spec file exists
         run: |
