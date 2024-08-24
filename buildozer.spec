@@ -11,6 +11,9 @@ package.domain = org.example
 # (list) Source files to include (by default, everything in the directory is included)
 source.include_exts = py,png,jpg,kv,atlas
 
+# (string) Directory where source files are located
+source.dir = .
+
 # (list) Application version
 version = 0.1
 
@@ -21,7 +24,6 @@ requirements = python3,kivy,vlc,ftplib,webbrowser
 android.permissions = INTERNET
 
 # (list) Supported platforms
-# e.g. android, ios, windows, linux
 platforms = android
 
 # (list) Build target (default is 'apk', can be 'aab' or 'apk')
@@ -34,7 +36,6 @@ android.sdk = 30
 android.ndk = 22b
 
 # (list) Android application ID
-# It must be a fully qualified package name, like com.example.app
 android.package = com.example.audioplayerapp
 
 # (list) Path to your custom icon (uncomment and specify if needed)
