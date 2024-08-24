@@ -37,22 +37,21 @@ android.ndk = 22b
 # It must be a fully qualified package name, like com.example.app
 android.package = com.example.audioplayerapp
 
-# (list) Path to your custom icon
-# Note: The icon should be a square PNG image (e.g. 512x512 pixels)
-# android.icon = %(source.dir)s/icon.png
+# (list) Path to your custom icon (uncomment and specify if needed)
+# android.icon = path/to/icon.png
 
-# (list) Path to your custom splash screen
-# android.splash = %(source.dir)s/splash.png
+# (list) Path to your custom splash screen (uncomment and specify if needed)
+# android.splash = path/to/splash.png
 
-# (list) Path to your custom settings screen
-# android.settings = %(source.dir)s/settings.png
+# (list) Path to your custom settings screen (uncomment and specify if needed)
+# android.settings = path/to/settings.png
 
 # (list) Add any additional options here
 # e.g. versioning, signing, etc.
 # Note: If your application uses additional libraries or tools, you may need to include them here.
 
 # (list) Android extra libraries (e.g. for additional features)
-# android.libs = <path_to_your_libs>
+# android.libs = path/to/libs
 
 # (list) The application’s package, example: com.example.myapp
 # This should be a fully qualified domain name
