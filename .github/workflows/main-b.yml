@@ -40,6 +40,12 @@ jobs:
           yes | $HOME/Android/Sdk/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/Android/Sdk --update
           yes | $HOME/Android/Sdk/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/Android/Sdk "platform-tools" "build-tools;30.0.3" "platforms;android-30"
 
+      - name: Set environment variables
+        run: |
+          echo "ANDROID_HOME=$HOME/Android/Sdk" >> $GITHUB_ENV
+          echo "ANDROID_SDK_ROOT=$HOME/Android/Sdk" >> $GITHUB_ENV
+          echo "PATH=$HOME/Android/Sdk/platform-tools:$HOME/Android/Sdk/cmdline-tools/bin:$HOME/Android/Sdk/build-tools/30.0.3:$PATH" >> $GITHUB_ENV
+
       - name: Ensure Buildozer.spec file exists
         run: |
           if [ ! -f buildozer.spec ]; then
